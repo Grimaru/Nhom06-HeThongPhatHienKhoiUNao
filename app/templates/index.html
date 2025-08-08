@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MRI Tumor Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>MRI Tumor Detection</h1>
+    </header>
+    <main>
+        <section>
+            <form action="/predict" method="post">
+                <label for="patient_id">Enter Patient ID:</label>
+                <input type="text" id="patient_id" name="patient_id" required>
+                <button type="submit">Predict</button>
+            </form>
+        </section>
+        <section>
+            <h2>Filter Patients</h2>
+            <form action="/filter" method="get">
+                <label>Grade:
+                    <select name="grade">
+                        <option value="HGG">HGG</option>
+                        <option value="LGG">LGG</option>
+                    </select>
+                </label>
+                <label>Tumor:
+                    <select name="tumor">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </label>
+                <button type="submit">Search</button>
+            </form>
+        </section>
+        <section>
+            <h2>View Statistics</h2>
+            <form action="/stats" method="get">
+                <label>Grade:
+                    <select name="grade">
+                        <option value="HGG">HGG</option>
+                        <option value="LGG">LGG</option>
+                    </select>
+                </label>
+                <label>Tumor:
+                    <select name="tumor">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </label>
+                <button type="submit">View Charts</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

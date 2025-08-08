@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Prediction Result</h1>
+    <p>ID: {{ patient.id }}</p>
+    <p>Age: {{ patient.age }}</p>
+    <p>Status: {{ patient.status }}</p>
+    <p>Survival: {{ patient.survival }}</p>
+    <div>
+        <div class="image-grid">
+        <div>
+            <p>Flair:</p>
+            <img src="{{ url_for('static', filename='images/' + images['flair']) }}" width="200"/>
+        </div>
+        <div>
+            <p>Seg:</p>
+            <img src="{{ url_for('static', filename='images/' + images['seg']) }}" width="200"/>
+        </div>
+        <div>
+            <p>T1:</p>
+            <img src="{{ url_for('static', filename='images/' + images['t1']) }}" width="200"/>
+        </div>
+        <div>
+            <p>T1CE:</p>
+            <img src="{{ url_for('static', filename='images/' + images['t1ce']) }}" width="200"/>
+        </div>
+        <div>
+            <p>T2:</p>
+            <img src="{{ url_for('static', filename='images/' + images['t2']) }}" width="200"/>
+        </div>
+    </div>   
+    <p>Grade: {{ patient.grade }}</p>
+
+    {% if result.active_contour %}
+    <div>
+        <p>Tumor Detection</p>
+        <img src="{{ url_for('static', filename=result.active_contour) }}" width="400" />
+    </div>
+    {% else %}
+        <p>No Active Contour Result Available</p>
+    {% endif %}
+
+    <div>
+        <p>Conclusion: {{ patient.tumor }}</p>
+    </div>
+    
+    {% if result.accuracy %}
+    <div>
+        <p>Model Accuracy: {{ result.accuracy }}%</p>
+    </div>
+    {% endif %}    
+
+    <a href="/">Back to Home</a>
+</body>
+</html>
